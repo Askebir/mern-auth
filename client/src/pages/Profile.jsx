@@ -3,7 +3,7 @@ import {useRef} from 'react'
 import {getStorage,getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage';
 import {app} from '../firebase';
 import {useDispatch} from 'react-redux'
-import {updateUserStart, updateUserSuccess, updateUserFailur, deleteUserSart, deleteUserSuccess,deleteUserFailure} from '../redux/user/userSlice'
+import {updateUserStart, updateUserSuccess, updateUserFailur, deleteUserSart, deleteUserSuccess,deleteUserFailure, signOut} from '../redux/user/userSlice'
 
 export default function Profile() {
   const dispatch = useDispatch()
@@ -88,11 +88,21 @@ s      }
         dispatch(deleteUserFailure(data))
         return;
       }
-      dispatch(seleteUserSuccess(data));
+      dispatch(deleteUserSuccess(data));
     }catch(error){
       dispatch(deleteUserFailure(error))
 
       
+    }
+  }
+
+  const handleSignOut = async() =>{
+    try{
+      await fetch('/api/auth/signout');
+      dispatch(signOut())
+    }catch(erro){
+      console.log(error)
+
     }
   }
 
@@ -113,7 +123,7 @@ s      }
       <div className="flex jusstify-between mt-5">
 
         <span onClick={handleDeleteAccount} className='text-red-700 cursor-pointer' >Delete Account</span>
-        <span className='text-red-700 cursor-pointer' >Sign out</span>
+        <span onClick={handleSignOut} className='text-red-700 cursor-pointer' >Sign out</span>
       </div>
       <p className='text-red-700 mt-5' >{error && 'Something went wrong!'}</p>
     </div>
