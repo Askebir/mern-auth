@@ -52,7 +52,7 @@ s      }
           <snap>{`'Uploading:'${imagePercent}'%'`}</snap>):imagePercent=== 100 ? (<snap className='text-green-700'>Image uploaded successfully</snap>)
         ):''}
         </p>
-         <img onClick={()=>fileRef.current.click()}  src={currentUser.profilePicture} alt='profle' className='h-4 w-24 self-center cursor-pointer rounded-full object-cover' />
+         <img onClick={()=>fileRef.current.click()}  src={ formData.profilePicture || currentUser.profilePicture} alt='profle' className='h-4 w-24 self-center cursor-pointer rounded-full object-cover' />
          <input defaultValue={currentUser.username} type="text" id='username' placeholder='username' className='bg-slate-100 rounded-lg p-3' />
          <input defaultValue={currentUser.email} type="email" id='email' placeholder='Email' className='bg-slate-100 rounded-lg p-3' />
          <input type="password" id='password' placeholder='Password' className='bg-slate-100 rounded-lg p-3' />
